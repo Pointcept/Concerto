@@ -14,14 +14,15 @@
 
 
 import copy
-import open3d as o3d
-import sonata
+import concerto
 import torch
+import open3d as o3d
 
 try:
     import flash_attn
 except ImportError:
     flash_attn = None
+device = "cuda" if torch.cuda.is_available() else "cpu"
 
 
 def get_pca_color(feat, brightness=1.25, center=True):
@@ -40,22 +41,22 @@ if __name__ == "__main__":
     # set random seed
     # (random seed affect pca color, yet change random seed need manual adjustment kmeans)
     # (the pca prevent in paper is with another version of cuda and pytorch environment)
-    sonata.utils.set_seed(53124)
+    concerto.utils.set_seed(53124)
     # Load model
     if flash_attn is not None:
-        model = sonata.load("sonata", repo_id="facebook/sonata").cuda()
+        model = concerto.load("concerto_large", repo_id="Pointcept/Concerto").to(device)
     else:
         custom_config = dict(
             enc_patch_size=[1024 for _ in range(5)],  # reduce patch size if necessary
             enable_flash=False,
         )
-        model = sonata.load(
-            "sonata", repo_id="facebook/sonata", custom_config=custom_config
-        ).cuda()
+        model = concerto.load(
+            "concerto_large", repo_id="Pointcept/Concerto", custom_config=custom_config
+        ).to(device)
     # Load default data transform pipeline
-    transform = sonata.transform.default()
+    transform = concerto.transform.default()
     # Load data
-    point1 = sonata.data.load("sample1")
+    point1 = concerto.data.load("sample1")
     point1.pop("segment200")
     segment = point1.pop("segment20")
     point1["segment"] = segment  # two kinds of segment exist in ScanNet, only use one
@@ -65,11 +66,11 @@ if __name__ == "__main__":
 
     point1 = transform(point1)
     point2 = transform(point2)
-    point = sonata.data.collate_fn([point1, point2])
+    point = concerto.data.collate_fn([point1, point2])
 
     with torch.inference_mode():
         for key in point.keys():
-            if isinstance(point[key], torch.Tensor):
+            if isinstance(point[key], torch.Tensor) and device == "cuda":
                 point[key] = point[key].cuda(non_blocking=True)
         # model forward:
         point = model(point)

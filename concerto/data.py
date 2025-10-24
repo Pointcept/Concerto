@@ -24,7 +24,7 @@ DATAS = ["sample1", "sample1_high_res", "sample1_dino"]
 
 
 def load(
-    name: str = "sonata",
+    name: str = "concerto_large",
     download_root: str = None,
 ):
     if name in DATAS:
@@ -34,7 +34,7 @@ def load(
             filename=f"{name}.npz",
             repo_type="dataset",
             revision="main",
-            local_dir=download_root or os.path.expanduser("~/.cache/sonata/data"),
+            local_dir=download_root or os.path.expanduser("~/.cache/concerto/data"),
         )
     elif os.path.isfile(name):
         print(f"Loading data in local path: {name} ...")

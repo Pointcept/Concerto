@@ -16,14 +16,16 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import open3d as o3d
-import sonata
+import concerto
 import torch
 import torch.nn.functional as F
+import argparse
 
 try:
     import flash_attn
 except ImportError:
     flash_attn = None
+device = "cuda" if torch.cuda.is_available() else "cpu"
 
 
 def to_numpy(x):
@@ -69,23 +71,42 @@ def get_line_set(coord, line, color=(1.0, 0.0, 0.0), verbose=True):
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        '--wo_color',
+        dest='wo_color',
+        action='store_true',
+        help="disable the color."
+    )
+    parser.add_argument(
+        '--wo_normal',
+        dest='wo_normal', 
+        action='store_true', 
+        help="disable the normal."
+    )
+    args = parser.parse_args()
     # set random seed
-    sonata.utils.set_seed(6463323)
+    concerto.utils.set_seed(6463323)
     # Load model
     if flash_attn is not None:
-        model = sonata.load("sonata", repo_id="facebook/sonata").cuda()
+        model = concerto.load("concerto_large", repo_id="Pointcept/Concerto").to(device)
     else:
         custom_config = dict(
             enc_patch_size=[1024 for _ in range(5)],  # reduce patch size if necessary
             enable_flash=False,
         )
-        model = sonata.load(
-            "sonata", repo_id="facebook/sonata", custom_config=custom_config
-        ).cuda()
+        model = concerto.load(
+            "concerto_large", repo_id="Pointcept/Concerto", custom_config=custom_config
+        ).to(device)
     # Load default data transform pipeline
-    transform = sonata.transform.default()
+    transform = concerto.transform.default()
     # Load data
-    data = sonata.data.load("sample1")
+    data = concerto.data.load("sample1")
+
+    if args.wo_color:
+        data["color"] = np.zeros_like(data["coord"])
+    if args.wo_normal:
+        data["normal"] = np.zeros_like(data["coord"])
     data.pop("segment200")
     segment = data.pop("segment20")
     data["segment"] = segment  # two kinds of segment exist in ScanNet, only use one
@@ -106,10 +127,10 @@ if __name__ == "__main__":
     # model forward:
     with torch.inference_mode():
         for key in global_data.keys():
-            if isinstance(global_data[key], torch.Tensor):
+            if isinstance(global_data[key], torch.Tensor) and device == "cuda":
                 global_data[key] = global_data[key].cuda(non_blocking=True)
         for key in local_data.keys():
-            if isinstance(local_data[key], torch.Tensor):
+            if isinstance(local_data[key], torch.Tensor) and device == "cuda":
                 local_data[key] = local_data[key].cuda(non_blocking=True)
         global_point = model(global_data)
         local_point = model(local_data)
@@ -178,7 +199,7 @@ if __name__ == "__main__":
         local_heat_color = cmap(inner_self.squeeze(0).cpu().numpy())[:, :3]
         global_heat_color = cmap(inner_cross.squeeze(0).cpu().numpy())[:, :3]
         # shift local view from global view
-        bias = torch.tensor([[-3.5, 1, 0]]).cuda()  # original bias in our paper
+        bias = torch.tensor([[-3.5, 1, 0]]).to(device)  # original bias in our paper
         pcds = get_point_cloud(
             coord=[global_point.coord, local_point.coord + bias],
             color=[global_heat_color, local_heat_color],

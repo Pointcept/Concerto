@@ -14,15 +14,17 @@
 
 
 import numpy as np
-import open3d as o3d
-import sonata
+import concerto
 import torch
 import torch.nn as nn
+import open3d as o3d
+import argparse
 
 try:
     import flash_attn
 except ImportError:
     flash_attn = None
+device = "cuda" if torch.cuda.is_available() else "cpu"
 
 
 # ScanNet Meta data
@@ -128,29 +130,50 @@ class SegHead(nn.Module):
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        '--wo_color',
+        dest='wo_color',
+        action='store_true',
+        help="disable the color."
+    )
+    parser.add_argument(
+        '--wo_normal',
+        dest='wo_normal', 
+        action='store_true', 
+        help="disable the normal."
+    )
+    args = parser.parse_args()
     # set random seed
-    sonata.utils.set_seed(24525867)
+    concerto.utils.set_seed(46647087)
     # Load model
     if flash_attn is not None:
-        model = sonata.load("sonata", repo_id="facebook/sonata").cuda()
+        model = concerto.load("concerto_large", repo_id="Pointcept/Concerto").to(device)
     else:
         custom_config = dict(
             enc_patch_size=[1024 for _ in range(5)],  # reduce patch size if necessary
             enable_flash=False,
         )
-        model = sonata.load(
-            "sonata", repo_id="facebook/sonata", custom_config=custom_config
-        ).cuda()
+        model = concerto.load(
+            "concerto_large", repo_id="Pointcept/Concerto", custom_config=custom_config
+        ).to(device)
     # Load linear probing seg head
-    ckpt = sonata.load(
-        "sonata_linear_prob_head_sc", repo_id="facebook/sonata", ckpt_only=True
+    ckpt = concerto.load(
+        "concerto_large_linear_prob_head_sc",
+        repo_id="Pointcept/Concerto",
+        ckpt_only=True,
     )
-    seg_head = SegHead(**ckpt["config"]).cuda()
+    seg_head = SegHead(**ckpt["config"]).to(device)
     seg_head.load_state_dict(ckpt["state_dict"])
     # Load default data transform pipeline
-    transform = sonata.transform.default()
+    transform = concerto.transform.default()
     # Load data
-    point = sonata.data.load("sample1")
+    point = concerto.data.load("sample1")
+
+    if args.wo_color:
+        point["color"] = np.zeros_like(point["coord"])
+    if args.wo_normal:
+        point["normal"] = np.zeros_like(point["coord"])
     point.pop("segment200")
     segment = point.pop("segment20")
     point["segment"] = segment  # two kinds of segment exist in ScanNet, only use one
@@ -162,7 +185,7 @@ if __name__ == "__main__":
     seg_head.eval()
     with torch.inference_mode():
         for key in point.keys():
-            if isinstance(point[key], torch.Tensor):
+            if isinstance(point[key], torch.Tensor) and device == "cuda":
                 point[key] = point[key].cuda(non_blocking=True)
         # model forward:
         point = model(point)
@@ -180,6 +203,6 @@ if __name__ == "__main__":
     # Visualize
     pcd = o3d.geometry.PointCloud()
     pcd.points = o3d.utility.Vector3dVector(point.coord.cpu().detach().numpy())
-    pcd.colors = o3d.utility.Vector3dVector(color / 255)
-    o3d.visualization.draw_geometries([pcd])
+    pcd.colors = o3d.utility.Vector3dVector(color / 255.0)
+    o3d.visualization.draw_geometries([pcd])/home/yujiazh/Code/Concerto_demo/example/video/re10k_1.mp4
     # o3d.io.write_point_cloud("sem_seg.ply", pcd)

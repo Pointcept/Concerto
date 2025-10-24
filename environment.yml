@@ -1,4 +1,4 @@
-name: sonata
+name: concerto
 channels:
   - pytorch
   - nvidia/label/cuda-12.4.1
@@ -28,4 +28,10 @@ dependencies:
   - pip:
     - torch-scatter --find-links https://data.pyg.org/whl/torch-2.5.0+cu124.html
     - git+https://github.com/Dao-AILab/flash-attention.git
-    - spconv-cu124
+    - spconv-cu124 
+    - opencv-python
+    - camtools
+    - trimesh
+    - natsort
+    - gradio
+    - einops

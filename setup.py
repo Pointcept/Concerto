@@ -19,11 +19,11 @@ from setuptools import setup, find_packages
 
 
 setup(
-    name="sonata",
-    py_modules=["sonata"],
+    name="concerto",
+    py_modules=["concerto"],
     version="1.0",
     description="",
-    author="Xiaoyang Wu",
+    author="Yujia Zhang",
     packages=find_packages(exclude=["demo*"]),
     include_package_data=True,
 )

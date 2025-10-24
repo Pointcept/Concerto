@@ -1,5 +1,5 @@
 """
-Point Transformer - V3 Mode2 - Sonata
+Point Transformer - V3 Mode2 - Sonata & Concerto
 Pointcept detached version
 
 Author: Xiaoyang Wu (xiaoyang.wu.cs@gmail.com)
@@ -44,8 +44,10 @@ from .utils import offset2bincount
 
 MODELS = [
     "sonata",
-    "sonata_small",
-    "sonata_linear_prob_head_sc",
+    "concerto_large",
+    "concerto_base",
+    "concerto_small",
+    "concerto_large_linear_prob_head_sc",
 ]
 
 
@@ -476,6 +478,7 @@ class GridPooling(PointModule):
         if self.traceable:
             point_dict["pooling_inverse"] = cluster
             point_dict["pooling_parent"] = point
+            point_dict["idx_ptr"] = idx_ptr
         order = point.order
         point = Point(point_dict)
         if self.norm is not None:
@@ -756,8 +759,8 @@ class PointTransformerV3(PointModule, PyTorchModelHubMixin):
 
 
 def load(
-    name: str = "sonata",
-    repo_id="facebook/sonata",
+    name: str = "concerto_large",
+    repo_id="Pointcept/Concerto",
     download_root: str = None,
     custom_config: dict = None,
     ckpt_only: bool = False,
@@ -769,7 +772,7 @@ def load(
             filename=f"{name}.pth",
             repo_type="model",
             revision="main",
-            local_dir=download_root or os.path.expanduser("~/.cache/sonata/ckpt"),
+            local_dir=download_root or os.path.expanduser("~/.cache/concerto/ckpt"),
         )
     elif os.path.isfile(name):
         print(f"Loading checkpoint in local path: {name} ...")
