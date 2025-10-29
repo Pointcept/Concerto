@@ -1,7 +1,8 @@
 # Concerto
 **TL;DR:** This repo provide joint 2D-3D self-supervised pre-trained [Point Transformer V3](https://github.com/Pointcept/PointTransformerV3) for 3D point cloud downstream tasks, modified from [Sonata](https://github.com/facebookresearch/sonata.git).
 
-This repo is the official project repository of the paper **_Concerto: Joint 2D-3D Self-Supervised Learning Emerges Spatial Representations_** and is mainly used for providing pre-trained models, inference code and visualization demo. For reproduce pre-training process of Concerto, please refer to our **[Pointcept](https://github.com/Pointcept/Pointcept)** codebase.
+This repo is the official project repository of the paper **_Concerto: Joint 2D-3D Self-Supervised Learning Emerges Spatial Representations_** and is mainly used for providing pre-trained models, inference code and visualization demo. For reproduce pre-training process of Concerto, please refer to our **[Pointcept](https://github.com/Pointcept/Pointcept)** codebase.  
+[ **Pretrain** ] [ **Concerto** ] - [ [Homepage](https://pointcept.github.io/Concerto/) ] [ [Paper](https://arxiv.org/abs/2510.23607) ] [ [Bib](#citation) ]
 
 
 <div align='left'>
@@ -198,7 +199,7 @@ If you find _Concerto_ useful to your research, please consider citing our works
 ```bib
 @inproceedings{zhang2025concerto,
   title={Concerto: Joint 2D-3D Self-Supervised Learning Emerges Spatial Representations},
-  author={Yujia Zhang, Xiaoyang Wu, Yixing Lao, Chengyao Wang, Zhuotao Tian, Naiyan Wang, Hengshuang Zhao},
+  author={Zhang, Yujia and Wu, Xiaoyang and Lao, Yixing and Wang, Chengyao and Tian, Zhuotao and Wang, Naiyan and Zhao, Hengshuang},
   booktitle={NeurIPS},
   year={2025}
 }
