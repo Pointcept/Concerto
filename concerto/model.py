@@ -44,6 +44,7 @@ from .utils import offset2bincount
 
 MODELS = [
     "sonata",
+    "concerto_large_outdoor",
     "concerto_large",
     "concerto_base",
     "concerto_small",

@@ -57,12 +57,16 @@ This repo provide two ways of installation: **standalone mode** and **package mo
   # For visualization demo without color and normal, use python demo/xxx.py --wo_color --wo_normal
   export PYTHONPATH=./
   python demo/0_pca.py
+  python demo/0_pca_outdoor.py
   python demo/1_similarity.py
   python demo/2_sem_seg.py  # linear probed head on ScanNet
   ```
 
   <div align='left'>
   <img src="https://raw.githubusercontent.com/pointcept/assets/main/concerto/demo.png" alt="teaser" width="800" />
+  </div>
+  <div align='left'>
+  <img src="https://raw.githubusercontent.com/pointcept/assets/main/concerto/demo_outdoor.png" alt="teaser" width="800" />
   </div>
 
   For video demo, we need VGGT to lift video to point cloud. The additional installation for VGGT is as below:

@@ -20,7 +20,7 @@ from collections.abc import Mapping, Sequence
 from huggingface_hub import hf_hub_download
 
 
-DATAS = ["sample1", "sample1_high_res", "sample1_dino"]
+DATAS = ["sample1", "sample1_high_res", "sample1_dino", "sample2_outdoor"]
 
 
 def load(
