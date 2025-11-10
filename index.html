@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concerto: Joint 2D-3D Self-Supervised Learning Emerges Spatial Representations</title>
+    
+    <!-- Meta tags for SEO and social sharing -->
+    <meta name="description" content="Concerto: A superior model for 3D representations, simulating of human concept learning for spatial cognition and combining 3D intra-modal self-distillation with 2D-3D cross-modal joint embedding">
+    <meta name="keywords" content="Point Cloud, 3D Representation Learning, 3D Semantic Segmentation, Self-supervised Learning">
+    <meta property="og:title" content="Concerto: Joint 2D-3D Self-Supervised Learning Emerges Spatial Representations">
+    <meta property="og:description" content="A superior model for 3D representations, simulating of human concept learning for spatial cognition and combining 3D intra-modal self-distillation with 2D-3D cross-modal joint embedding.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourusername.github.io/literality">
+    <meta property="og:image" content="logo.png">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    
+    <!-- third-party css -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- custom css -->
+    <link rel="stylesheet" href="css/template.css">
+    <link rel="stylesheet" href="css/page.css">
+    <link rel="stylesheet" href="css/scene-viewer.css">
+    <link rel="stylesheet" href="css/frame-viewer.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Three.js CDN -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/three@0.150.1/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.150.1/examples/js/controls/PointerLockControls.js"></script> -->
+    <!-- three.js -->
+    <script src="js/three.min.js"></script>
+    <script src="js/PLYLoader.js"></script>
+    <script src="js/OrbitControls.js"></script>
+    <!-- custom js -->
+    <script src="js/SceneViewer.js"></script>
+    <!-- third-party js -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/clipboard.min.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="#home">Concerto</a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#video-sec">Video</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#pipeline">Pipeline</a></li>
+                <li><a href="#applications">Applications</a></li>
+                <li><a href="#citation">Citation</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-title-row">
+                    <span class="hero-title-main">Concerto</span>
+                </div>
+                <h1 class="hero-title-sub">Joint 2D-3D Self-Supervised Learning Emerges Spatial Representations</h1>
+                <div class="hero-links">
+                    <a href="https://arxiv.org/abs/2510.23607" class="btn btn-secondary" target="_blank"><i class="fa-solid fa-file-alt"></i> Paper</a>
+                    <a href="https://huggingface.co/spaces/Pointcept/Concerto" class="btn btn-secondary" target="_blank">🤗 Demo
+                    </a>
+                    <a href="https://github.com/Pointcept/Concerto.git" class="btn btn-secondary" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
+                </div>
+                <div class="authors-row">
+                    <div class="authors">
+                        <a href="https://yujia-zhang0913.github.io/" target="_blank">Yujia Zhang</a><sup>1</sup>,
+                        <a href="https://xywu.me/" target="_blank">Xiaoyang Wu</a><sup>1</sup>,
+                        <a href="https://yxlao.github.io/" target="_blank">Yixing Lao</a><sup>1</sup>,
+                        <a href="https://wcy1122.github.io/" target="_blank">Chengyao Wang</a><sup>2</sup>,
+                        <a href="https://scholar.google.com/citations?user=mEjhz-IAAAAJ&hl=zh-TW" target="_blank">Zhuotao Tian</a><sup>3</sup>,
+                        <a href="https://scholar.google.com/citations?user=yAWtq6QAAAAJ&hl=en" target="_blank">Naiyan Wang</a>,
+                        <a href="https://hszhao.github.io/" target="_blank">Hengshuang Zhao</a><sup>1</sup>
+                    </div>
+                </div>
+                <div class="institutions">
+                    <sup>1</sup>The University of Hong Kong, <sup>2</sup>The Chinese University of Hong Kong, <sup>3</sup>Harbin Institute of Technology (Shenzhen)
+                </div>
+
+                <div class="hero-description">
+                    <p>
+                        <p>
+                            We are excited to present <b>Concerto</b> 🎶, a superior model for 3D representations, simulating human concept learning process for spatial cognition and combining 3D intra-modal self-distillation with 2D-3D cross-modal joint embedding.
+                        </p>
+                    </p>
+                </div>
+                <div class="teaser-img">
+                    <img src="https://github.com/Pointcept/Assets/blob/main/concerto/teaser.png?raw=true" alt="Concerto Teaser" class="teaser-img">
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Video Section -->
+    <section id="video-sec" class="video-sec">
+        <h2>Video</h2>
+        <div class="hero-video">
+            <div class="hero-description">
+                <p>
+                    We present PCA visualizations of Concerto's inference on point cloud and video data, comparing the raw input (left) to the processed result (right). By employing joint 2D-3D self-supervised learning, Concerto effectively unlocks the potential of large-scale unlabeled point cloud datasets. 
+                    With current feed-forward reconstruction methods compacting videos with spatial prior knowledge, Concerto exhibits strong performance on video-lifted point cloud, paving the way to lifted spatial intelligence.
+                    With oceans of unlabeled video data online, we can obtain oceans of opportunities with Concerto.
+                </p>
+            </div>
+            <p></p>
+            <div class="video-wrapper">
+                <video controls autoplay muted loop>
+                    <source src="https://raw.githubusercontent.com/Pointcept/Assets/main/concerto/demos/demo.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery">
+        <h2>Gallery</h2>
+        <div class="container">
+            <div class="hero-description">
+                <p style="text-align: center;">
+                    We show interactive point cloud visualizations for both point cloud and video data. The raw RGB colorful point cloud is on the left. The PCA processed representation visualization is on the right. <br>
+                    (Mouse wheel to zoom in/out, drag to rotate, ctrl + drag to pan)
+                </p>
+            </div>
+
+        <div class="ply-selector">
+            <div class="model-grid">
+                <button onclick="loadModelPair('1')">
+                <img src="https://github.com/Pointcept/Assets/blob/main/concerto/demos/ply/1/preview.png?raw=true" alt="Point cloud 1">
+                <span>Point Cloud 1</span>
+            </button>
+                <button onclick="loadModelPair('2')">
+                <img src="https://github.com/Pointcept/Assets/blob/main/concerto/demos/ply/2/preview.png?raw=true" alt="Point cloud 2">
+                <span>Point Cloud 2</span>
+            </button>
+                <button onclick="loadModelPair('3')">
+                <img src="https://github.com/Pointcept/Assets/blob/main/concerto/demos/ply/3/preview.png?raw=true" alt="Point cloud 3">
+                <span>Point Cloud 3</span>
+            </button>
+                <button onclick="loadModelPair('4')">
+                <img src="https://github.com/Pointcept/Assets/blob/main/concerto/demos/ply/4/preview.png?raw=true" alt="Point cloud 4">
+                <span>Point Cloud 4</span>
+            </button>
+                <button onclick="loadModelPair('5')">
+                <img src="https://github.com/Pointcept/Assets/blob/main/concerto/demos/ply/5/preview.png?raw=true" alt="Video 1">
+                <span>Video 1</span>
+            </button>
+                <button onclick="loadModelPair('6')">
+                <img src="https://github.com/Pointcept/Assets/blob/main/concerto/demos/ply/6/preview.png?raw=true" alt="Video 2">
+                <span>Video 2</span>
+            </button>
+                <button onclick="loadModelPair('7')">
+                <img src="https://github.com/Pointcept/Assets/blob/main/concerto/demos/ply/7/preview.png?raw=true" alt="Video 3">
+                <span>Video 3</span>
+            </button>
+                <button onclick="loadModelPair('8')">
+                <img src="https://github.com/Pointcept/Assets/blob/main/concerto/demos/ply/8/preview.png?raw=true" alt="Video 4">
+                <span>Video 4</span>
+                </button>
+            </div>
+            </div>
+            
+            <div class="sv-canvas-container">
+            <div class="sv-canvas-wrapper">
+                <div id="canvas-pcd" class="sv-canvas"></div>
+                <div class="sv-button-container">
+                    <button class="sv-control-button sv-zoom-in-button">+</button>
+                    <button class="sv-control-button sv-zoom-out-button">-</button>
+                    <button class="sv-control-button sv-reset-button">⟳</button>
+                </div>
+                <div class="sv-canvas-label">Raw</div>
+            </div>
+            <div class="sv-canvas-wrapper">
+                <div id="canvas-pca" class="sv-canvas"></div>
+                <div class="sv-button-container">
+                    <button class="sv-control-button sv-zoom-in-button">+</button>
+                    <button class="sv-control-button sv-zoom-out-button">-</button>
+                    <button class="sv-control-button sv-reset-button">⟳</button>
+                </div>
+                <div class="sv-canvas-label">PCA</div>
+            </div>
+        </div>
+        <div class="gallery-extra-images" style="text-align:center; margin:1.5rem 0;">
+            <img src="https://github.com/Pointcept/Assets/blob/main/concerto/demo.png?raw=true" alt="Gallery Top" style="max-width:100%; height:auto; display:block; margin:0.5rem auto;">
+            <img src="https://github.com/Pointcept/Assets/blob/main/concerto/demo_outdoor.png?raw=true" alt="Gallery Bottom" style="max-width:100%; height:auto; display:block; margin:0.5rem auto;">
+        </div>
+        <div class="hero-description">
+            <p style="text-align: center;">
+                For more examples, use our inference github code to generate your own visualizations! <a href="https://github.com/Pointcept/Concerto/tree/main">Check it out</a>
+            </p>
+        </div>
+    </section>
+    
+
+    <!-- Abstract Section -->
+    <section id="abstract" class="abstract">
+        <div class="container">
+            <h2>Abstract</h2>
+            <div class="abstract-text">
+                Humans learn abstract concepts through multisensory synergy, and once formed, such representations can often be recalled from a single modality. Inspired by this principle, we introduce Concerto, a minimalist simulation of human concept learning for spatial cognition, combining 3D intra-modal self-distillation with 2D-3D cross-modal joint embedding. Despite its simplicity, Concerto learns more coherent and informative spatial features, as demonstrated by zero-shot visualizations. It outperforms both standalone SOTA 2D and 3D self-supervised models by 14.2% and 4.8%, respectively, as well as their feature concatenation, in linear probing for 3D scene perception. With full fine-tuning, Concerto sets new SOTA results across multiple scene understanding benchmarks (e.g., 80.7% mIoU on ScanNet). We further present a variant of Concerto tailored for video-lifted point cloud spatial understanding, and a translator that linearly projects Concerto representations into CLIP’s language space, enabling open-world perception. These results highlight that Concerto emerges spatial representations with superior fine-grained geometric and semantic consistency.
+            </div>
+        </div>
+    </section>
+
+    <!-- Motivation -->
+    <section id="motivation" class="motivation">
+        <div class="container">
+            <h2>Beyond Single Modality</h2>
+            <div class="motivation-embed">
+    
+                <div class="motivation-block">
+                    <ul>
+                        <li><strong>Start from human cognition learning:</strong></li>
+                    </ul>
+                    <p>
+                        Our inspiration toward this target is rooted in how humans learn abstract concepts: through multisensory synergy. Consider the example of an <em>apple</em> (as illustrated in right)—our understanding of it is formed through repeatedly seeing, touching, and tasting apples, allowing us to internalize its geometry, texture, and semantic meaning in a unified, predictive way (right top). Yet once such a representation is formed, it can be evoked from just a single modality: seeing an image of an apple can vividly recall its weight and texture (right bottom). This ability to retrieve rich, structured knowledge from partial sensory input underscores the importance of learning modality-agnostic representations that are both unified and predictive.
+                    </p>
+                    <img src="https://github.com/Pointcept/Assets/blob/main/concerto/motivation.png?raw=true" alt="Concerto Motivation" class="motivation-img">
+                </div>
+    
+                <div class="motivation-block">
+                    <ul>
+                        <li><strong>Towards a Superior Representation by Joint Multi-Modal Learning:</strong></li>
+                    </ul>
+                    <p>
+                        Inspired by this principle, we believe it is similar to leverage the synergy of self-supervised learning on 2D images and 3D point clouds. We begin with a pilot experiment: fusing self-supervised features from image model DINOv2 and point cloud model Sonata to benchmark the 2D, 3D, and fused representations via linear probing on ScanNet (detailed implementations can be found in our paper). Notably, this naive combination outperforms both individual modalities, suggesting the presence of complementary information and hinting at a richer representational space if the synergy that emerges are fully captured when modalities are learned together.
+                    </p>
+                    <img src="https://github.com/Pointcept/Assets/blob/main/concerto/pilot.png?raw=true" alt="Concerto Pilot" class="motivation-chat">
+                </div>
+    
+            </div>
+        </div>
+    </section>
+
+    <!-- Pipeline Section -->
+    <section id="pipeline" class="pipeline">
+        <div class="container">
+            <h2>Pipeline of Concerto</h2>
+            <div class="pipeline-embed">
+                <img src="https://github.com/Pointcept/Assets/blob/main/concerto/pipeline_main.png?raw=true" alt="Concerto Pipeline" class="pipeline-img">
+            </div>
+            <p class="pipeline-caption">
+                Concerto simulates human multisensory synergy by coupling<br> (a) intra-modal self-distillation on 3D point clouds to progressively refine its internal spatial representations, and <br>(b) cross-modal joint embedding prediction that aligns point features with corresponding image patch features using camera parameters.
+            </p>
+        </div>
+    </section>
+
+    <!-- Applications Section -->
+    <section id="applications" class="applications">
+        <div class="container">
+            <h2>Applications</h2>
+            <div class="hero-description">
+                <p>
+                    <strong>Language Probing</strong>: We demonstrate Concerto's ability to formulate concepts similar to human language, paving the way for future exploration of alignment with text-based semantic spaces. With linear probing, we translate Concerto's representations to language space. Below is the visualizations of object locating by inputting specific words to Concerto.
+                </p>
+            </div>
+            <img src="https://github.com/Pointcept/Assets/blob/main/concerto/language.png?raw=true" alt="Concerto Language Application" class="application-img">
+        </div>
+    </section>
+
+        
+    <!-- Learn More Section -->
+    <section id="learn-more" class="learn-more">
+        <div class="container">
+            <h2>More Details?</h2>
+            <div class="learn-more-text">
+                For more details on methodologies, evaluation metrics, and comparison with baselines, please refer to our paper.<br><br>
+                <a href="https://arxiv.org/abs/2510.23607" class="btn btn-primary learn-more-btn" target="_blank" style="font-size:1.5rem; padding: 0.8em 2em; margin-top: 1em;">Read the Paper</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Citation Section -->
+    <section id="citation" class="citation">
+        <div class="container">
+            <h2>Citation</h2>
+            <div class="citation-box">
+                <pre>
+<code>
+@inproceedings{zhang2025concerto,
+  title={Concerto: Joint 2D-3D Self-Supervised Learning Emerges Spatial Representations},
+  author={Zhang, Yujia and Wu, Xiaoyang and Lao, Yixing and Wang, Chengyao and Tian, Zhuotao and Wang, Naiyan and Zhao, Hengshuang},
+  booktitle={NeurIPS},
+  year={2025}
+}</code>
+</pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Concerto Project. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Lightbox Modal for Gallery -->
+    <div id="lightbox-modal" class="lightbox-modal">
+        <span class="lightbox-close" id="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img" src="" alt="High Resolution Gallery Image">
+    </div>
+
+    <script src="js/script.js"></script>
+    <!-- <script src="threejs-viewer.js"></script> -->
+</body>
+</html> 
