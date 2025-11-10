@@ -2,7 +2,7 @@
 **TL;DR:** This repo provide joint 2D-3D self-supervised pre-trained [Point Transformer V3](https://github.com/Pointcept/PointTransformerV3) for 3D point cloud downstream tasks, modified from [Sonata](https://github.com/facebookresearch/sonata.git).
 
 This repo is the official project repository of the paper **_Concerto: Joint 2D-3D Self-Supervised Learning Emerges Spatial Representations_** and is mainly used for providing pre-trained models, inference code and visualization demo. For reproduce pre-training process of Concerto, please refer to our **[Pointcept](https://github.com/Pointcept/Pointcept)** codebase.  
-[ **Pretrain** ] [ **Concerto** ] - [ [Homepage](https://pointcept.github.io/Concerto/) ] [ [Paper](https://arxiv.org/abs/2510.23607) ] [ [Bib](#citation) ]
+[ **Pretrain** ] [ **Concerto** ] - [ [Homepage](https://pointcept.github.io/Concerto/) ] [ [Paper](https://arxiv.org/abs/2510.23607) ] [ [Weight](https://huggingface.co/Pointcept/Concerto) ] [ [Bib](#citation) ]
 
 
 <div align='left'>
@@ -143,7 +143,7 @@ This repo provide two ways of installation: **standalone mode** and **package mo
 - **Model.** Load the pre-trained model by running the following command:
   ```python
   # Load the pre-trained model from Huggingface
-  # supported models: "concerto_large", "concerto_base", "concerto_small"
+  # supported models: "concerto_large", "concerto_base", "concerto_small". Those are the pre-release version of our next work, which can deal with input without color and normal. We pre-release these for general public use because many tasks lack such information.
   # ckpt is cached in ~/.cache/concerto/ckpt, and the path can be customized by setting 'download_root'
   # three models of different size: concerto_large, concerto_base, concerto_small
   model = concerto.model.load("concerto_large", repo_id="Pointcept/Concerto").cuda()
