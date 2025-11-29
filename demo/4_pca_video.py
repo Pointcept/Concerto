@@ -855,7 +855,7 @@ if __name__ == "__main__":
     pcd = o3d.geometry.PointCloud()
     pcd.points = o3d.utility.Vector3dVector(original_coord)
     pcd.colors = o3d.utility.Vector3dVector(original_pca_color.cpu().detach().numpy())
-    # o3d.visualization.draw_geometries([pcd])
+    o3d.visualization.draw_geometries([pcd])
     # point_cloud = trimesh.PointCloud(vertices=original_coord, colors=original_color)
     # point_cloud.export(os.path.join(target_dir, "pcd.ply"))
 
