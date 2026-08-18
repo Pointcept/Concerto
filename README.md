@@ -1,7 +1,7 @@
 # Concerto
 **TL;DR:** This repo provide joint 2D-3D self-supervised pre-trained [Point Transformer V3](https://github.com/Pointcept/PointTransformerV3) for 3D point cloud downstream tasks, modified from [Sonata](https://github.com/facebookresearch/sonata.git).
 
-This repo is the official project repository of the paper **_Concerto: Joint 2D-3D Self-Supervised Learning Emerges Spatial Representations_** and is mainly used for providing pre-trained models, inference code and visualization demo. For reproduce pre-training process of Concerto, please refer to our **[Pointcept](https://github.com/Pointcept/Pointcept)** codebase.  
+This repo is the official project repository of the paper **_Concerto: Joint 2D-3D Self-Supervised Learning Emerges Spatial Representations_** and is mainly used for providing pre-trained models, inference code, and visualization demos. For reproduce the pre-training process of Concerto, please refer to our **[Pointcept](https://github.com/Pointcept/Pointcept)** codebase.  
 [ **Pretrain** ] [ **Concerto** ] - [ [Homepage](https://pointcept.github.io/Concerto/) ] [ [Paper](https://arxiv.org/abs/2510.23607) ] [ [Weight](https://huggingface.co/Pointcept/Concerto) ] [ [Bib](#citation) ]
 
 
@@ -10,7 +10,8 @@ This repo is the official project repository of the paper **_Concerto: Joint 2D-
 </div>
 
 ## Highlights
-- *October, 2025* : We release the pre-training code along with **[Pointcept](https://github.com/Pointcept/Pointcept)** and provide an easy-to-use inference demo and visualization with our pre-trained model weight in this repo. We highly recommend user begin with is repo for **[quick start](#quick-start)**.
+- *August, 2026* : The pretrained weight using SigLIP instead of DINOv2 is released at **[Huggingface](https://huggingface.co/Pointcept/Concerto/blob/main/concerto_base_siglip.pth)**.
+- *October, 2025* : We released the pre-training code along with **[Pointcept](https://github.com/Pointcept/Pointcept)** and provide an easy-to-use inference demo and visualization with our pre-trained model weights in this repo. We highly recommend users begin with this repo for **[quick start](#quick-start)**.
 
 ## Overview
 - [Installation](#installation)
@@ -18,7 +19,7 @@ This repo is the official project repository of the paper **_Concerto: Joint 2D-
 - [Citation](#citation)
 
 ## Installation
-This repo provide two ways of installation: **standalone mode** and **package mode**.
+This repo provides two ways of installation: **standalone mode** and **package mode**.
 - The **standalone mode** is recommended for users who want to use the code for quick inference and visualization. We provide a most easy way to install the environment by using `conda` environment file. The whole environment including `cuda` and `pytorch` can be easily installed by running the following command:
   ```bash
   # Create and activate conda environment named as 'concerto'
